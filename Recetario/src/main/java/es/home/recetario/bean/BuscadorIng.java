@@ -17,7 +17,7 @@ import es.home.recetario.service.IngredienteService;
 import es.home.recetario.vo.Ingrediente;
 
 /**
- * @author daniel
+ * @author deesbc
  * 
  */
 @ManagedBean
