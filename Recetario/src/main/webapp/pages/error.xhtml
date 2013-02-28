@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<ui:define name="title">
+		<title><h:outputText value="#{txtApp['error.titulo']}" /></title>
+	</ui:define>
+</h:head>
+<h:body>
+	<ui:composition template="/layout/commons-layout.xhtml">
+		<ui:define name="content">
+			<div id="contenidoInteriores">
+				<h2>
+					<h:outputText value="#{msgApp['h2.error.titulo']}" />
+				</h2>
+				<div id="cajaBlancaInfo">
+					<h3>
+						<h:outputText value="#{msgApp['h3.error.titulo']}" />
+					</h3>
+					<ui:fragment rendered="#{errorBean.generico}">
+						<p class="aviso">
+							<h:outputText value="#{msgApp['generic.01.error']}" />
+						</p>
+					</ui:fragment>
+					<ui:fragment rendered="#{!errorBean.generico}">
+						<h:messages id="genericError" />
+					</ui:fragment>	
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

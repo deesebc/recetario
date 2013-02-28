@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:custom="http://recetario/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head>
+	<title><h:outputText value="#{msgApp['titulo.aplicacion']}" /></title>
+	<!-- INICIO INSTRUCCIONES PARA EVITAR ViewExpiredException -->
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<!-- FIN INSTRUCCIONES PARA EVITAR ViewExpiredException -->
+</h:head>
+<h:body>
+	<h1 class="ocultar"><h:outputText value="#{msgApp['titulo.aplicacion']}" /></h1>
+	<ui:composition template="/layout/commons-layout.xhtml">
+				<ui:define name="content">
+				<h:form>
+					<h:panelGrid id="panel1" columns="2">
+					  <h:outputText value="Nombre:" />
+					  <h:inputText id="first" value="#{buscadorIng.nomIng}" />
+					  <h:commandButton styleClass="myButton" id="button1" value="Buscar" action="#{buscadorIng.buscar}" />
+					  <h:commandButton styleClass="myButton" id="button2" value="Crear" action="detalleIngrediente" >
+					  	<f:setPropertyActionListener value="#{null}" target="#{buscadorIng.selected}" />  
+					  	</h:commandButton>
+					</h:panelGrid>
+					<h:messages id="genericError" />
+					<hr/>
+					<ui:fragment rendered="#{fn:length(buscadorIng.lista) > 0}">
+		                <h:dataTable value="#{buscadorIng.lista}" var="item">
+		                    <h:column>
+		                        <f:facet name="header">
+		                        	<h:outputText value="Identificador" />
+		                        </f:facet>
+		                        <h:outputText value="#{item.idIngrediente}" />
+		                    </h:column>
+		                    <h:column>
+		                        <f:facet name="header">
+		                        	<h:outputText value="Nombre" />
+		                        </f:facet>
+		                        <h:outputText value="#{item.nombre}" />
+		                    </h:column>
+		                    <h:column>
+		                        <f:facet name="header">
+		                        	<h:outputText value="Accion" />
+		                        </f:facet>
+		                       <h:commandButton styleClass="pageButton" action="#{buscadorIng.editar}" title="Edit" value="Editar" >
+		                       	<f:setPropertyActionListener value="#{item}" target="#{buscadorIng.selected}" />  
+		                       </h:commandButton>
+		                       <h:commandButton styleClass="pageButton" action="#{buscadorIng.eliminar}" title="Delete" value="Eliminar" >
+		                       	<f:setPropertyActionListener value="#{item}" target="#{buscadorIng.selected}" />  
+		                       </h:commandButton>    
+		                    </h:column>
+		                </h:dataTable>
+		                <custom:paginacion bean="#{buscadorIng}" />
+	                </ui:fragment>
+	                <br />
+				</h:form>
+			</ui:define>
+		</ui:composition>
+</h:body>
+</html>

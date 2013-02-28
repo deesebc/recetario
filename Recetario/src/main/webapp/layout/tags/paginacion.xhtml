@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:fc="http://java.sun.com/jsf/core">
+    <h:body>
+       <ui:composition>
+ 		<ui:fragment rendered="#{bean.totalPages > 0}">
+		<h:commandButton styleClass="pageButton" value="Primera" action="#{bean.pageFirst}" disabled="#{bean.firstRow == 0}" />
+        <h:commandButton styleClass="pageButton" value="Anterior" action="#{bean.pagePrevious}" disabled="#{bean.firstRow == 0}" />
+        <t:dataList value="#{bean.pages}" var="page">
+            <h:commandLink value="#{page}" actionListener="#{bean.page}" rendered="#{page != bean.currentPage}" />
+            <b><h:outputText value=" #{page} " escape="false" rendered="#{page == bean.currentPage}" /></b>
+        </t:dataList>
+        <h:commandButton styleClass="pageButton" value="Siguiente" action="#{bean.pageNext}" disabled="#{bean.firstRow + bean.rowsPerPage >= bean.totalRows}" />
+        <h:commandButton styleClass="pageButton" value="Última" action="#{bean.pageLast}" disabled="#{bean.firstRow + bean.rowsPerPage >= bean.totalRows}" />
+        <h:outputText value="  (#{bean.firstRow+1}-#{bean.lastRow}/#{bean.totalRows})" />
+        <h:outputText value="  |  Por página:" />
+        <h:commandLink id="link1" value="  10 " action="#{bean.pageFirst}" styleClass="#{bean.rowsPerPage == 10?'fuerte':''}" >
+        	<fc:setPropertyActionListener value="10" target="#{bean.rowsPerPage}" />  
+        </h:commandLink>
+        <h:commandLink id="link2" value=" 20 " action="#{bean.pageFirst}" styleClass="#{bean.rowsPerPage == 20?'fuerte':''}">
+        	<fc:setPropertyActionListener value="20" target="#{bean.rowsPerPage}" />  
+        </h:commandLink>
+        <h:commandLink id="link3" value=" 50 " action="#{bean.pageFirst}" styleClass="#{bean.rowsPerPage == 50?'fuerte':''}">
+        	<fc:setPropertyActionListener value="50" target="#{bean.rowsPerPage}" />  
+        </h:commandLink>
+        <h:commandLink id="link4" value=" 100 " action="#{bean.pageFirst}" styleClass="#{bean.rowsPerPage == 100?'fuerte':''}">
+        	<fc:setPropertyActionListener value="100" target="#{bean.rowsPerPage}" />  
+        </h:commandLink>
+        <h:commandLink id="link5" value=" Todos" action="#{bean.pageFirst}" styleClass="#{bean.rowsPerPage == bean.totalRows?'fuerte':''}">
+        	<fc:setPropertyActionListener value="#{bean.totalRows}" target="#{bean.rowsPerPage}" />  
+        </h:commandLink>
+ 		</ui:fragment>
+       </ui:composition>
+    </h:body>
+</html>

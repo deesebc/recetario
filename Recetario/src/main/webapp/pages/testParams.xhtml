@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><h:outputText value="#{msgApp['titulo.aplicacion']}" /></title>
+	<!-- INICIO INSTRUCCIONES PARA EVITAR ViewExpiredException -->
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<!-- FIN INSTRUCCIONES PARA EVITAR ViewExpiredException -->
+</h:head>
+<f:metadata>
+	  <f:viewParam name="uno" value="#{parametroBean.uno}"/> 	
+	  <f:viewParam name="dos" value="#{parametroBean.dos}"/>
+	</f:metadata>
+<h:body>
+	
+	<h1 class="ocultar"><h:outputText value="#{msgApp['titulo.aplicacion']}" /></h1>
+	<ui:composition template="/layout/commons-layout.xhtml">
+			<ui:define name="content">
+				<h:form>
+				  uno-<h:outputText value="#{parametroBean.uno}" />-
+				  dos-<h:outputText value="#{parametroBean.dos}" />-
+				   
+				    
+				</h:form>
+			</ui:define>
+	</ui:composition>
+</h:body>
+</html>

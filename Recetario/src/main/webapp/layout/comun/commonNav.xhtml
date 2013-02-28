@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+	<ui:composition>
+		<h:form id="linkForm">
+		<h:commandLink id="link01" action="/faces/index.xhtml" value="#{msgApp['enlace.inicio']}"/><br/>
+		<h:commandLink id="link02" action="#{menu.goToBuscadorReceta}" value="Buscador de recetas" /><br/>
+		<h:commandLink id="link03" action="#{menu.goToCrearReceta}" value="Crear Receta" /><br/>
+		<h:commandLink id="link04" action="#{menu.goToBuscadorIngrediente}" value="Buscador de Ingredientes" /><br/>
+		<h:commandLink id="link05" action="#{menu.goToCrearIngrediente}" value="Crear Ingrediente" /><br/>
+		</h:form>
+	</ui:composition>
+</body>
+</html>

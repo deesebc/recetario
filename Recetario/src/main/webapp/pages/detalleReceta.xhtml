@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:custom="http://recetario/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head>
+	<title><h:outputText value="#{msgApp['titulo.aplicacion']}" /></title>
+	<!-- INICIO INSTRUCCIONES PARA EVITAR ViewExpiredException -->
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<!-- FIN INSTRUCCIONES PARA EVITAR ViewExpiredException -->
+</h:head>
+<h:body>
+	<h1 class="ocultar"><h:outputText value="#{msgApp['titulo.aplicacion']}" /></h1>
+	<ui:composition template="/layout/commons-layout.xhtml">
+			<ui:define name="content">
+				<h:form>
+					<h:panelGrid id="panel1" columns="2">
+					 <h:outputText value="Nombre:" />
+					<h:inputText value="#{detalleReceta.receta.nombre}" size="40" maxlength="100"  readonly="#{!detalleReceta.editable}" />
+					<h:outputText value="Cantidades:" />
+					<h:inputTextarea value="#{detalleReceta.receta.cantidades}" readonly="#{!detalleReceta.editable}" cols="50" rows="5"/>
+					<h:outputText value="Dats:" />
+					<h:inputTextarea value="#{detalleReceta.receta.datos}" readonly="#{!detalleReceta.editable}" cols="50" rows="5" />
+					</h:panelGrid>
+					<ui:fragment rendered="#{fn:length(detalleReceta.lista) > 0}">
+					<h:dataTable value="#{detalleReceta.lista}" var="item" id="listaIng">
+							<h:column>
+					            <f:facet name="header">
+					                <h:selectBooleanCheckbox value="#{detalleReceta.selectAll}" id="checkMultiple">
+									      <f:ajax event="click" render="listaIng" listener="#{detalleReceta.marcarOpciones}"  />
+									</h:selectBooleanCheckbox>
+					            </f:facet>
+					            <h:selectBooleanCheckbox value="#{detalleReceta.selecteds[item]}" />
+					        </h:column>
+		                    <h:column>
+		                        <f:facet name="header">
+		                        	<h:outputText value="Identificador" />
+		                        </f:facet>
+		                        <h:outputText value="#{item.idIngrediente}" />
+		                    </h:column>
+		                    <h:column>
+		                        <f:facet name="header">
+		                        	<h:outputText value="Nombre" />
+		                        </f:facet>
+		                        <h:outputText value="#{item.nombre}" />
+		                    </h:column>
+		                </h:dataTable>
+		                <custom:paginacion bean="#{detalleReceta}" />
+		                </ui:fragment>
+		                <br/>
+		                <h:commandButton styleClass="myButton" value="Atras" action="busqRecetas" />
+		                <ui:fragment rendered="#{!detalleReceta.editable}">
+							<h:commandButton styleClass="myButton" value="Modificar" action="#{detalleReceta.modificar}" />
+		                </ui:fragment>
+		                <ui:fragment rendered="#{detalleReceta.editable}">
+							<h:commandButton styleClass="myButton" value="Guardar" action="#{detalleReceta.guardar}" />
+		                </ui:fragment>
+				</h:form>
+			</ui:define>
+	</ui:composition>
+</h:body>
+</html>

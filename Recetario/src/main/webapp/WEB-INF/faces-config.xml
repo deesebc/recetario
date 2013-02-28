@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+	version="2.0">
+
+	<!-- fichero de propiedades de mensajes -->
+	<application>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+		<locale-config>
+			<default-locale>es</default-locale>
+			<supported-locale>es</supported-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>i18n.msgApp</base-name>
+			<var>msgApp</var>
+		</resource-bundle>
+	</application>
+
+	<!-- fichero de configuracion de la aplicacion -->
+	<application>
+		<resource-bundle>
+			<base-name>configuracion.recetario</base-name>
+			<var>config</var>
+		</resource-bundle>
+	</application>
+	
+	<navigation-rule>
+	    <from-view-id>/index.xhtml</from-view-id> 
+	    <navigation-case>
+	        <from-outcome>busqRecetas</from-outcome>
+	        <to-view-id>/pages/busqRecetas.xhtml</to-view-id>
+	    </navigation-case>
+	    <navigation-case>
+	        <from-outcome>busqIngredientes</from-outcome>
+	        <to-view-id>/pages/busqIngredientes.xhtml</to-view-id>
+	    </navigation-case>
+	    <navigation-case>
+	        <from-outcome>detalleReceta</from-outcome>
+	        <to-view-id>/pages/detalleReceta.xhtml</to-view-id>
+	    </navigation-case>
+	    <navigation-case>
+	        <from-outcome>detalleIngrediente</from-outcome>
+	        <to-view-id>/pages/detalleIngrediente.xhtml</to-view-id>
+	    </navigation-case>
+	</navigation-rule>
+
+</faces-config>
